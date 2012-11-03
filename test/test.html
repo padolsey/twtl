@@ -14,7 +14,7 @@
 <script src="../src/twtl.js"></script>
 <script>
 var _expect = twtl.expect;
-var _module = twtl.module;
+var _test = twtl.test;
 var _twtl = twtl;
 </script>
 
@@ -47,7 +47,7 @@ twtl.console = {
 expect(1).toBe(2);
 _expect(twtl.console.warn.lastCall.slice(0,-1)).toEqual(['Expected ', 1, 'to be', 2]);
 
-_module('Correct Assertions', function() {
+_test('Correct Assertions', function() {
   twtl.console.warn.calls = 0;
   expect(1).toBe(1);
   expect(true).toBe(true);
@@ -69,7 +69,7 @@ _module('Correct Assertions', function() {
   _expect(twtl.console.warn.calls).toBe(0);
 });
 
-_module('Incorrect Assertions', function() {
+_test('Incorrect Assertions', function() {
   twtl.console.warn.calls = 0;
   expect(1).toBe(2);
   expect(1).toEqual(2);
@@ -84,18 +84,18 @@ _module('Incorrect Assertions', function() {
   _expect(twtl.console.warn.calls).toBe(10);
 });
 
-_module('Locations', function() {
+_test('Locations', function() {
   // THE NEXT LINE MUST BE UPDATED TO REFLECT ITS ACTUAL LINE NUMBER
   var lineNumber = 89;
   expect(1).toBe(2); _expect(twtl.console.warn.lastCall.pop()).toBe('(test.html:' + ++lineNumber + ')');
   expect(1).toEqual({}); _expect(twtl.console.warn.lastCall.pop()).toBe('(test.html:' + ++lineNumber + ')');
 });
 
-_module('Modules', function() {
+_test('Modules', function() {
   var x = function() {};
-  module('X', x);
-  _expect(twtl.console.group.lastCall).toEqual(['Module: X']);
-  _expect(twtl.console.groupEnd.lastCall).toEqual(['Module: X']);
+  test('X', x);
+  _expect(twtl.console.group.lastCall).toEqual(['Test: X']);
+  _expect(twtl.console.groupEnd.lastCall).toEqual(['Test: X']);
 });
 
 if (_twtl.failures === 0) {

@@ -19,7 +19,7 @@ It comes with two asserters by default:
 *plus their `not` counterparts*
 
 ```js
-module('Something I need to test', function() {
+test('Something I need to test', function() {
 
   expect(1).toBe(2);             // ✘
   expect({a:1}).toBe({a:1});     // ✘
@@ -33,7 +33,7 @@ module('Something I need to test', function() {
 // Augment functionality
 twtl.augment('toMatch', function(a,b) { return b.test(a); });
 
-module('Something else', function() {
+test('Something else', function() {
 
   expect('abc').toMatch(/.+/);     // ✔
   expect('abc').not.toMatch(/.+/); // ✘
