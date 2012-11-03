@@ -1,4 +1,4 @@
-The **Teensy Weensy Testing Library** (*twtl*) is a tiny (1.5k) testing library for in-browser testing.
+The **Teensy Weensy Testing Library** (*twtl*) is a tiny (1.6k) testing library for in-browser testing.
 
 It outputs to your browser's console. Currently supports:
 
