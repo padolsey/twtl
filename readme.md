@@ -1,4 +1,4 @@
-The **Teensy Weensy Testing Library** (*twtl*) is a tiny testing library for in-browser testing.
+The **Teensy Weensy Testing Library** (*twtl*) is a tiny (1.5k) testing library for in-browser testing.
 
 It outputs to your browser's console. Currently supports:
 
@@ -10,6 +10,13 @@ It outputs to your browser's console. Currently supports:
 *twtl* is not for asynchronous or server-side testing. It's just a small script for in-browser testing. It has rudimentary support for node.js but that's really not its purpose.
 
 ### API
+
+It comes with two asserters by default:
+
+ * toBe: Asserts that `a` is identical (`===`) to `b`
+ * toEqual: Asserts that `a` is equal (by sensible measures) to `b`
+
+*plus their `not` counterparts*
 
 ```js
 module('Something I need to test', function() {
