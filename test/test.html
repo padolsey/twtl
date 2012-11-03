@@ -1,21 +1,27 @@
 <!doctype html>
 
 <meta charset="utf-8" />
+<title>twtl tests</title>
 
 <body>
-  <Script>
-var _console = console;</script>
 
+<!--
+  Load one TWTL to test another TWTL.
+  lol
+-->
+
+<!-- This is the twtl that we'll use to test twtl with -->
 <script src="twtl.js"></script>
 <script>
-
 var _expect = twtl.expect;
 var _module = twtl.module;
 var _twtl = twtl;
-
 </script>
+
+<!-- And this is the twtl that we'll be testing -->
 <script src="twtl.js"></script>
 <script>
+
 twtl.console = {
   warn: function() {
     twtl.console.warn.lastCall = [].slice.call(arguments);
@@ -36,6 +42,7 @@ twtl.console = {
   log: function() {}
 };
 
+// TESTS:
 
 expect(1).toBe(2);
 _expect(twtl.console.warn.lastCall.slice(0,-1)).toEqual(['Expected ', 1, 'to be', 2]);
@@ -91,7 +98,7 @@ _module('Modules', function() {
 });
 
 if (_twtl.failures === 0) {
-  _console.log('All tests pass');
+  console.log('All tests pass');
 }
 
 </script>
