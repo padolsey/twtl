@@ -11,7 +11,7 @@
 -->
 
 <!-- This is the twtl that we'll use to test twtl with -->
-<script src="twtl.js"></script>
+<script src="../src/twtl.js"></script>
 <script>
 var _expect = twtl.expect;
 var _module = twtl.module;
@@ -19,7 +19,7 @@ var _twtl = twtl;
 </script>
 
 <!-- And this is the twtl that we'll be testing -->
-<script src="twtl.js"></script>
+<script src="../src/twtl.js"></script>
 <script>
 
 twtl.console = {
@@ -85,7 +85,8 @@ _module('Incorrect Assertions', function() {
 });
 
 _module('Locations', function() {
-  var lineNumber = 81;
+  // THE NEXT LINE MUST BE UPDATED TO REFLECT ITS ACTUAL LINE NUMBER
+  var lineNumber = 89;
   expect(1).toBe(2); _expect(twtl.console.warn.lastCall.pop()).toBe('(test.html:' + ++lineNumber + ')');
   expect(1).toEqual({}); _expect(twtl.console.warn.lastCall.pop()).toBe('(test.html:' + ++lineNumber + ')');
 });
