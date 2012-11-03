@@ -1,0 +1,99 @@
+<!doctype html>
+
+<meta charset="utf-8" />
+
+<body>
+  <Script>
+var _console = console;</script>
+
+<script src="twtl.js"></script>
+<script>
+
+var _expect = twtl.expect;
+var _module = twtl.module;
+var _twtl = twtl;
+
+</script>
+<script src="twtl.js"></script>
+<script>
+twtl.console = {
+  warn: function() {
+    twtl.console.warn.lastCall = [].slice.call(arguments);
+    //console.log('>>', arguments);
+    if (twtl.console.warn.calls) twtl.console.warn.calls++;
+    else twtl.console.warn.calls = 1;
+  },
+  group: function() {
+    twtl.console.group.lastCall = [].slice.call(arguments);
+    if (twtl.console.group.calls) twtl.console.group.calls++;
+    else twtl.console.group.calls = 1;
+  },
+  groupEnd: function() {
+    twtl.console.groupEnd.lastCall = [].slice.call(arguments);
+    if (twtl.console.groupEnd.calls) twtl.console.groupEnd.calls++;
+    else twtl.console.groupEnd.calls = 1;
+  },
+  log: function() {}
+};
+
+
+expect(1).toBe(2);
+_expect(twtl.console.warn.lastCall.slice(0,-1)).toEqual(['Expected ', 1, 'to be', 2]);
+
+_module('Correct Assertions', function() {
+  twtl.console.warn.calls = 0;
+  expect(1).toBe(1);
+  expect(true).toBe(true);
+  expect(true).not.toBe(null);
+  expect(null).not.toBe(undefined);
+  expect(null).not.toEqual(undefined);
+  expect(undefined).toBe(undefined);
+  expect(1).toEqual(1);
+  expect({}).not.toBe(1);
+  expect({}).not.toEqual(1);
+  expect([12,33,44]).toEqual([12,33,44]);
+  expect([12,33,44]).not.toBe([12,33,44]);
+  expect(RegExp('ab(c)', 'gi')).not.toBe(RegExp('ab(c)', 'gi'));
+  expect(RegExp('ab(c)', 'gi')).not.toBe(/ab(c)/gi);
+  expect(RegExp('ab(c)', 'gi')).toEqual(/ab(c)/gi);
+  expect(RegExp('ab(c)', 'gi')).not.toEqual(RegExp('...ab(c)', 'gi'));
+  expect({a: 1, b:{___:[1,2,3]}}).toEqual({a: 1, b:{___:[1,2,3]}});
+  expect({a: 1, b:{___:[1,2,3]}}).not.toEqual({a: 1, b:{___:[1,2,3,4]}});
+  _expect(twtl.console.warn.calls).toBe(0);
+});
+
+_module('Incorrect Assertions', function() {
+  twtl.console.warn.calls = 0;
+  expect(1).toBe(2);
+  expect(1).toEqual(2);
+  expect({}).toBe({});
+  expect({}).not.toEqual({});
+  expect([1,2,3]).toBe({});
+  expect([1,2,3]).not.toEqual([1,2,3]);
+  expect([1]).toEqual({length:1,0:1});
+  expect('Hi').toEqual('hi');
+  expect('Thing').toBe(new String('Thing'));
+  expect('Thing').not.toEqual(new String('Thing'));
+  _expect(twtl.console.warn.calls).toBe(10);
+});
+
+_module('Locations', function() {
+  var lineNumber = 81;
+  expect(1).toBe(2); _expect(twtl.console.warn.lastCall.pop()).toBe('(test.html:' + ++lineNumber + ')');
+  expect(1).toEqual({}); _expect(twtl.console.warn.lastCall.pop()).toBe('(test.html:' + ++lineNumber + ')');
+});
+
+_module('Modules', function() {
+  var x = function() {};
+  module('X', x);
+  _expect(twtl.console.group.lastCall).toEqual(['Module: X']);
+  _expect(twtl.console.groupEnd.lastCall).toEqual(['Module: X']);
+});
+
+if (_twtl.failures === 0) {
+  _console.log('All tests pass');
+}
+
+</script>
+
+</body>

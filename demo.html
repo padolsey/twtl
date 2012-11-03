@@ -1,0 +1,33 @@
+<!doctype html>
+
+<meta charset="utf-8" />
+
+<body>
+
+<script src="twtl.js"></script>
+
+<script>
+
+module('Something I need to test', function() {
+
+  expect(1).toBe(2);             // ✘
+  expect({a:1}).toBe({a:1});     // ✘
+  expect({a:1}).toEqual({a:1});  // ✔
+
+  expect(1).not.toBe(2);         // ✔
+  expect(1).not.toBe(1);         // ✘
+
+});
+
+// Augment functionality
+twtl.augment('toMatch', function(a,b) { return b.test(a); });
+
+module('Something else', function() {
+
+  expect('abc').toMatch(/.+/);     // ✔
+  expect('abc').not.toMatch(/.+/); // ✘
+
+});
+</script>
+
+</body>
