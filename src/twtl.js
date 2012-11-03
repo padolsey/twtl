@@ -1,5 +1,6 @@
 /**
  * Teensy Weensy Testing Library
+ * https://github.com/padolsey/twtl
  * twtl.js
  * v 0.1
  */
